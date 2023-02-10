@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Dictionary;
 
 public class SpellChecker
 {
@@ -51,9 +52,24 @@ public class SpellChecker
      */
     public boolean binarySpellCheck(String word)
     {
-        /* IMPLEMENT ME! */
-
-        // this return is a "stub" value to get code to compile
+        int i = 0;
+        int upperHalf = dictionary.size();
+        int lowerHalf = 0;
+        while(i <= (int) (Math.log(dictionary.size()) / Math.log(2))){
+            int middle = ((upperHalf+lowerHalf)/2);
+            if(word.compareTo(dictionary.get(middle)) == 0){
+                System.out.println("Number of loops: " + i);
+                return true;
+            }
+            else if(word.compareTo(dictionary.get(middle)) > 0){
+                lowerHalf += (upperHalf-lowerHalf)/2;
+            }
+            else if(word.compareTo(dictionary.get(middle)) < 0){
+                upperHalf -= (upperHalf-lowerHalf)/2;
+            }
+            i++;
+        }
+        System.out.println("Number of loops: " + i);
         return false;
     }
 
